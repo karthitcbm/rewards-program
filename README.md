@@ -1,4 +1,4 @@
-# Rewards-program
+# Rewards Program
 
 To Run Application 
 
