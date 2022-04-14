@@ -65,11 +65,17 @@ function App() {
     }
   }
 
+  const formatDate = (date) => {
+    const [year, month, day] = date.split("-");
+    const newDate = `${month}/${day}/${year}`
+    return newDate;
+  }
+
   const btnAddtransaction = () => {
     let data = { ...loadedData };
     let month = new Date(newTransaction['date']);
+    console.log('month', month.getMonth());
     if (month.getMonth() + 1 == 1 || month.getMonth() + 1 == 2 || month.getMonth() + 1 == 3) {
-      console.log('new',newTransaction)
       data[currentUser].push(newTransaction);
       console.log(data)
       setloadedData({ ...data });
@@ -85,7 +91,7 @@ function App() {
       marginBottom: "50px",
       fontSize: "20px",
     }}>
-      <h2 style={{ textAlign: "center" }}>User Rewards Dashborad</h2>
+      <h2 style={{ textAlign: "center" }}>Rewards Program</h2>
       <div className="select-style">
         <select onChange={e => userSelect(e.target.value)} value={currentUser} >
           <option value="" disabled>Select User</option>
@@ -138,7 +144,7 @@ function App() {
               <tbody>
                 {userTransactions.map((item, index) => {
                   return <tr key={index}>
-                    <td>{item["date"]}</td>
+                    <td>{formatDate(item["date"])}</td>
                     <td>{item["amount"]}</td>
                     <td>{calRew(item["amount"])}</td>
                   </tr>
